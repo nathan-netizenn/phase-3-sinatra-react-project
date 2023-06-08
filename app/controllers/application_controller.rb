@@ -44,6 +44,22 @@ class ApplicationController < Sinatra::Base
     rnd = Randomquote.all
     rnd.to_json
   end
+  get '/pat/:id' do
+    rnd = Randomquote.find(params[:id])
+    rnd.to_json
+  end
+
+post '/pat' do
+  request_body = JSON.parse(request.body.read)
+
+  quoter = request_body['quoter']
+ 
+
+  # Perform any necessary validation or processing on the data
+
+  new_quote = Randomquote.create(quoter: quoter)
+  new_quote.to_json
+end
 
   get '/pa' do
     sub = Submission.all
